@@ -1,0 +1,215 @@
+@baseUrl = http://localhost:5000
+@contentType = application/json
+
+### =========================================
+### 0) Health Check
+### =========================================
+GET {{baseUrl}}/health
+
+### =========================================
+### 1) Auth - Login (captures JWT token)
+### =========================================
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "admin@library.com",
+  "password": "Admin@12345"
+}
+
+###
+@token = {{login.response.body.token}}
+
+### =========================================
+### 2) Genres - List/Create/Update/Delete
+### =========================================
+# List genres
+GET {{baseUrl}}/api/genres
+Authorization: Bearer {{token}}
+
+###
+# Create a genre
+# @name createGenre
+POST {{baseUrl}}/api/genres
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+  "name": "Philosophy2"
+}
+
+###
+@genreId = {{createGenre.response.body.id}}
+
+###
+# Update created genre
+PATCH {{baseUrl}}/api/genres/{{genreId}}
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+  "name": "Philosophy and Ethics"
+}
+
+###
+# Delete created genre (optional)
+DELETE {{baseUrl}}/api/genres/{{genreId}}
+Authorization: Bearer {{token}}
+
+### =========================================
+### 3) Books - CRUD + Search/Filter
+### =========================================
+# List all books
+GET {{baseUrl}}/api/books
+Authorization: Bearer {{token}}
+
+###
+# Search books by title
+GET {{baseUrl}}/api/books?q=clean
+Authorization: Bearer {{token}}
+
+###
+# Create a new book (set genre_id to an existing genre)
+# @name createBook
+POST {{baseUrl}}/api/books
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+  "title": "REST Client Testing Book",
+  "author": "API Tester",
+  "isbn": "9780000000001",
+  "genre_id": 1,
+  "total_copies": 3,
+  "available_copies": 3
+}
+
+###
+@bookId = {{createBook.response.body.id}}
+
+###
+# Update created book
+PATCH {{baseUrl}}/api/books/{{bookId}}
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+  "available_copies": 2
+}
+
+###
+# Delete created book (optional)
+DELETE {{baseUrl}}/api/books/{{bookId}}
+Authorization: Bearer {{token}}
+
+### =========================================
+### 4) Members - Register/Edit/Delete/History
+### =========================================
+# Create a member
+# @name createMember
+POST {{baseUrl}}/api/members
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+  "full_name": "REST Member",
+  "email": "rest.member@example.com",
+  "phone": "+201011122233"
+}
+
+###
+@memberId = {{createMember.response.body.id}}
+
+###
+# Update member
+PATCH {{baseUrl}}/api/members/{{memberId}}
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+  "phone": "+201099988877"
+}
+
+###
+# Member borrowing history
+GET {{baseUrl}}/api/members/{{memberId}}/history
+Authorization: Bearer {{token}}
+
+### =========================================
+### 5) Borrowing/Return + Due Date + Overdue
+### =========================================
+# Borrow a book (set book_id to existing seeded book)
+# @name borrowBook
+POST {{baseUrl}}/api/borrows
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+  "book_id": 1,
+  "member_id": {{memberId}},
+  "due_date": "2026-12-31T23:59:59.000Z"
+}
+
+###
+@borrowId = {{borrowBook.response.body.id}}
+
+###
+# Return borrowed book
+PATCH {{baseUrl}}/api/borrows/{{borrowId}}/return
+Authorization: Bearer {{token}}
+
+###
+# List overdue borrows
+GET {{baseUrl}}/api/borrows/overdue
+Authorization: Bearer {{token}}
+
+### =========================================
+### 6) Staff Management (admin role required)
+### =========================================
+# Create staff (librarian)
+# @name createStaff
+POST {{baseUrl}}/api/staff
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+  "full_name": "REST Librarian",
+  "email": "rest.librarian@example.com",
+  "password": "Librarian@123",
+  "role": "librarian"
+}
+
+###
+@staffId = {{createStaff.response.body.id}}
+
+###
+# Delete created staff
+DELETE {{baseUrl}}/api/staff/{{staffId}}
+Authorization: Bearer {{token}}
+
+### =========================================
+### 7) Reports
+### =========================================
+# Key statistics
+GET {{baseUrl}}/api/reports/stats
+Authorization: Bearer {{token}}
+
+###
+# Popular genres
+GET {{baseUrl}}/api/reports/genres/popular
+Authorization: Bearer {{token}}
+
+### =========================================
+### 8) Cleanup (optional)
+### =========================================
+# Delete member created during tests
+DELETE {{baseUrl}}/api/members/{{memberId}}
+Authorization: Bearer {{token}}
+
+### =========================================
+### 9) Auth - Logout
+### =========================================
+POST {{baseUrl}}/api/auth/logout
+Authorization: Bearer {{token}}
+

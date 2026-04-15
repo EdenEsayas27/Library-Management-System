@@ -1,5 +1,11 @@
 const memberModel = require("../models/memberModel");
 
+async function listMembers(req, res) {
+  const { data, error } = await memberModel.listMembers(req.query);
+  if (error) return res.status(400).json({ message: error.message });
+  return res.json(data);
+}
+
 async function createMember(req, res) {
   const { data, error } = await memberModel.createMember(req.body);
   if (error) return res.status(400).json({ message: error.message });
@@ -24,4 +30,4 @@ async function memberHistory(req, res) {
   return res.json(data);
 }
 
-module.exports = { createMember, updateMember, deleteMember, memberHistory };
+module.exports = { listMembers, createMember, updateMember, deleteMember, memberHistory };

@@ -1,5 +1,14 @@
 const supabase = require("../config/supabase");
 
+async function listMembers({ q }) {
+  let query = supabase
+    .from("members")
+    .select("*")
+    .order("created_at", { ascending: false });
+  if (q) query = query.ilike("full_name", `%${q}%`);
+  return query;
+}
+
 async function createMember(payload) {
   return supabase.from("members").insert(payload).select().single();
 }
@@ -20,4 +29,4 @@ async function getBorrowHistory(memberId) {
     .order("borrowed_at", { ascending: false });
 }
 
-module.exports = { createMember, updateMember, deleteMember, getBorrowHistory };
+module.exports = { listMembers, createMember, updateMember, deleteMember, getBorrowHistory };

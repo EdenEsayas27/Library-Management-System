@@ -6,6 +6,7 @@ const { requireRole } = require("../middlewares/roleMiddleware");
 const router = express.Router();
 
 // Staff management and role assignment (admin only)
+router.get("/", requireAuth, requireRole("admin"), controller.listStaff);
 router.post("/", requireAuth, requireRole("admin"), controller.createStaff);
 router.delete("/:id", requireAuth, requireRole("admin"), controller.deleteStaff);
 

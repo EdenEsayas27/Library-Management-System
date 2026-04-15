@@ -5,6 +5,7 @@ const { requireAuth } = require("../middlewares/authMiddleware");
 const router = express.Router();
 
 // Member management + borrowing history
+router.get("/", requireAuth, controller.listMembers);
 router.post("/", requireAuth, controller.createMember);
 router.patch("/:id", requireAuth, controller.updateMember);
 router.delete("/:id", requireAuth, controller.deleteMember);

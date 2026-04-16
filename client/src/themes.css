@@ -1,0 +1,90 @@
+/* Light Theme */
+[data-theme="light"] {
+    --color-primary: 245 245 245;
+    --color-primary-foreground: 17 17 17;
+    --color-secondary: 229 231 235;
+    --color-accent: 59 130 246;
+    --color-accent-foreground: 255 255 255;
+    --color-background: 255 255 255;
+    --color-foreground: 17 17 17;
+    --color-card: 255 255 255;
+    --color-border: 229 231 235;
+  }
+  
+  /* Dark Theme */
+  [data-theme="dark"] {
+    --color-primary: 31 41 55;
+    --color-primary-foreground: 243 244 246;
+    --color-secondary: 55 65 81;
+    --color-accent: 96 165 250;
+    --color-accent-foreground: 255 255 255;
+    --color-background: 17 24 39;
+    --color-foreground: 243 244 246;
+    --color-card: 31 41 55;
+    --color-border: 55 65 81;
+  }
+  
+  /* Emerald Theme */
+  [data-theme="emerald"] {
+    --color-primary: 6 78 59;
+    --color-primary-foreground: 255 255 255;
+    --color-secondary: 16 185 129;
+    --color-accent: 245 158 11;
+    --color-accent-foreground: 255 255 255;
+    --color-background: 6 78 59;
+    --color-foreground: 255 255 255;
+    --color-card: 16 185 129;
+    --color-border: 52 211 153;
+  }
+  
+  /* Forest Theme */
+  [data-theme="forest"] {
+    --color-primary: 20 83 45;
+    --color-primary-foreground: 255 255 255;
+    --color-secondary: 34 197 94;
+    --color-accent: 234 179 8;
+    --color-accent-foreground: 255 255 255;
+    --color-background: 20 83 45;
+    --color-foreground: 255 255 255;
+    --color-card: 34 197 94;
+    --color-border: 74 222 128;
+  }
+  
+  /* Ocean Theme */
+  [data-theme="ocean"] {
+    --color-primary: 2 132 199;
+    --color-primary-foreground: 255 255 255;
+    --color-secondary: 14 165 233;
+    --color-accent: 251 146 60;
+    --color-accent-foreground: 255 255 255;
+    --color-background: 2 132 199;
+    --color-foreground: 255 255 255;
+    --color-card: 14 165 233;
+    --color-border: 56 189 248;
+  }
+  
+  /* Sunset Theme */
+  [data-theme="sunset"] {
+    --color-primary: 154 52 18;
+    --color-primary-foreground: 255 255 255;
+    --color-secondary: 249 115 22;
+    --color-accent: 236 72 153;
+    --color-accent-foreground: 255 255 255;
+    --color-background: 154 52 18;
+    --color-foreground: 255 255 255;
+    --color-card: 194 65 12;
+    --color-border: 251 146 60;
+  }
+  
+  /* Purple Theme */
+  [data-theme="purple"] {
+    --color-primary: 88 28 135;
+    --color-primary-foreground: 255 255 255;
+    --color-secondary: 139 92 246;
+    --color-accent: 236 72 153;
+    --color-accent-foreground: 255 255 255;
+    --color-background: 88 28 135;
+    --color-foreground: 255 255 255;
+    --color-card: 124 58 237;
+    --color-border: 167 139 250;
+  }

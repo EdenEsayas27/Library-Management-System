@@ -1,21 +1,243 @@
 @import "tailwindcss";
 
-@layer base {
-  body {
-    @apply m-0 bg-slate-100 text-slate-900;
-    font-family: Inter, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  }
+/* Theme CSS variables */
+:root {
+  --bg-gradient-from: #064e3b;
+  --bg-gradient-to: #0f766e;
+  --text-color: #ffffff;
+  --text-color-secondary: #e5e7eb;
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.2);
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-border: rgba(255, 255, 255, 0.2);
+  --input-placeholder: rgba(255, 255, 255, 0.4);
+}
 
-  h1,
-  h2,
-  h3,
-  p {
-    @apply m-0;
-  }
+[data-theme="light"] {
+  --bg-gradient-from: #f9fafb;
+  --bg-gradient-to: #e5e7eb;
+  --text-color: #111827;
+  --text-color-secondary: #4b5563;
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --input-placeholder: #9ca3af;
+}
 
-  button,
-  input,
-  select {
-    font: inherit;
-  }
+[data-theme="dark"] {
+  --bg-gradient-from: #1f2937;
+  --bg-gradient-to: #111827;
+  --text-color: #f9fafb;
+  --text-color-secondary: #9ca3af;
+  --card-bg: rgba(31, 41, 55, 0.8);
+  --border-color: rgba(75, 85, 99, 0.5);
+  --input-bg: #374151;
+  --input-border: #4b5563;
+  --input-placeholder: #9ca3af;
+}
+
+[data-theme="emerald"] {
+  --bg-gradient-from: #064e3b;
+  --bg-gradient-to: #0f766e;
+  --text-color: #ffffff;
+  --text-color-secondary: #a7f3d0;
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.2);
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-border: rgba(255, 255, 255, 0.2);
+  --input-placeholder: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="forest"] {
+  --bg-gradient-from: #14532d;
+  --bg-gradient-to: #166534;
+  --text-color: #ffffff;
+  --text-color-secondary: #bbf7d0;
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.2);
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-border: rgba(255, 255, 255, 0.2);
+  --input-placeholder: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="ocean"] {
+  --bg-gradient-from: #0c4a6e;
+  --bg-gradient-to: #0284c7;
+  --text-color: #ffffff;
+  --text-color-secondary: #bae6fd;
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.2);
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-border: rgba(255, 255, 255, 0.2);
+  --input-placeholder: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="sunset"] {
+  --bg-gradient-from: #9a3412;
+  --bg-gradient-to: #ea580c;
+  --text-color: #ffffff;
+  --text-color-secondary: #fed7aa;
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.2);
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-border: rgba(255, 255, 255, 0.2);
+  --input-placeholder: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="purple"] {
+  --bg-gradient-from: #4c1d95;
+  --bg-gradient-to: #7e22ce;
+  --text-color: #ffffff;
+  --text-color-secondary: #e9d5ff;
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.2);
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-border: rgba(255, 255, 255, 0.2);
+  --input-placeholder: rgba(255, 255, 255, 0.4);
+}
+
+/* Global text colors */
+body, 
+h1, h2, h3, h4, h5, h6,
+p, span, div, label, li,
+.text-white, .text-slate-900, .text-slate-700, .text-slate-500,
+.text-gray-900, .text-gray-700, .text-gray-500 {
+  color: var(--text-color) !important;
+}
+
+/* Secondary text color */
+.text-slate-500, .text-gray-500, .text-white, .text-white, .text-white,
+.text-amber-100, .text-slate-400, .text-gray-400 {
+  color: var(--text-color-secondary) !important;
+}
+
+/* Input field styles */
+input, 
+select, 
+textarea,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="datetime-local"],
+select,
+textarea {
+  background-color: var(--input-bg) !important;
+  border: 1px solid var(--input-border) !important;
+  color: var(--text-color) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--input-placeholder) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none !important;
+  border-color: #f59e0b !important;
+  /* ring: 2px solid rgba(245, 158, 11, 0.2) !important; */
+}
+
+/* Card backgrounds */
+.bg-white, .bg-slate-50, .bg-gray-50,
+.bg-white, .bg-white, .bg-white{
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Borders */
+.border-slate-200, .border-gray-200, .border-slate-300,
+.border-white, .border-white{
+  border-color: var(--border-color) !important;
+}
+
+/* Table styles */
+table {
+  color: var(--text-color) !important;
+}
+
+th {
+  color: var(--text-color-secondary) !important;
+}
+
+td {
+  color: var(--text-color) !important;
+}
+
+/* Button overrides - keep original colors for action buttons */
+.bg-blue-600, .bg-rose-600, .bg-emerald-500, 
+.bg-gradient-to-r, .bg-amber-500, .bg-orange-500 {
+  color: white !important;
+}
+
+/* Modal styles */
+.fixed .bg-white,
+.fixed .bg-gradient-to-br {
+  color: var(--text-color) !important;
+}
+/* Add these to your existing index.css */
+
+/* Theme-aware text colors */
+.text-theme-primary {
+  color: var(--text-color) !important;
+}
+
+.text-theme-secondary {
+  color: var(--text-color-secondary) !important;
+}
+
+.border-theme-border {
+  border-color: var(--border-color) !important;
+}
+
+.bg-theme-card {
+  background-color: var(--card-bg) !important;
+}
+
+/* Modal styles that adapt to theme */
+.modal-content,
+.fixed .rounded-2xl,
+.fixed .rounded-xl {
+  background: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+  backdrop-filter: blur(16px) !important;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  background-color: var(--input-bg) !important;
+  border-color: var(--input-border) !important;
+  color: var(--text-color) !important;
+}
+
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+  color: var(--input-placeholder) !important;
+}
+
+/* Override any hardcoded background colors in modals */
+.fixed .bg-gradient-to-br {
+  background: var(--card-bg) !important;
+  backdrop-filter: blur(16px) !important;
+}
+
+/* Make sure dropdowns in modals are visible */
+select option {
+  background-color: var(--input-bg) !important;
+  color: var(--text-color) !important;
+}
+[data-theme="light"] {
+  --bg-gradient-from: #f9fafb;
+  --bg-gradient-to: #e5e7eb;
+  --text-color: #111827;
+  --text-color-secondary: #6b7280; /* Gray for secondary text */
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --input-placeholder: #9ca3af;
 }

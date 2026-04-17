@@ -406,7 +406,7 @@ function BooksPage() {
                   <label className="mb-1 block text-sm font-medium text-white/80">ISBN</label>
                   <input
                     className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-white placeholder:text-white/40 focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400/20"
-                    placeholder="ISBN (optional)"
+                    placeholder="ISBN "
                     value={form.isbn}
                     onChange={(e) => setForm((p) => ({ ...p, isbn: e.target.value }))}
                   />
